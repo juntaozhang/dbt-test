@@ -1,0 +1,33 @@
+semantic_models:
+  - name: pymt
+    model: ref('stg_payment')
+    dimensions:
+      - name: method
+        type: categorical
+      - name: created
+        expr: created
+        type: time
+        type_params:
+          time_granularity: day
+    defaults:
+      agg_time_dimension: created
+    primary_entity: payment_id
+    measures:
+      - name: pymt_count
+        expr: 1
+        agg: sum
+      - name: pymt_amount
+        expr: amount
+        agg: sum
+
+metrics:
+  - name: pymt_count
+    type: simple
+    label: Payment Count
+    type_params:
+      measure: pymt_count
+  - name: pymt_amount
+    type: simple
+    label: Payment Amount
+    type_params:
+      measure: pymt_amount
