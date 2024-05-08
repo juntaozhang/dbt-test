@@ -5,7 +5,6 @@ semantic_models:
       - name: method
         type: categorical
       - name: created
-        expr: created
         type: time
         type_params:
           time_granularity: day
